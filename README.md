@@ -6,7 +6,7 @@ Step-by-step implementation of AI/ML concepts. Modular documentation of my learn
 ---
 
 ### 📝 About This Repository
-This repository documents my journey in learning artificial intelligence and machine and deep learning techniques. I will share in it all the concepts I learn.
+This repository documents my journey in learning artificial intelligence, machine and deep learning techniques. I will share in it all the concepts I learn.
 
 I will conclude this repository with a project related to renewable energy that will be the cornerstone of my graduation project for the next year. I hope that I can complete this path or at least build a solid base and deep understanding during the next six months.
 
@@ -17,13 +17,19 @@ Each folder represents a standalone component of my learning process. I am break
 
 * **📂 Linear-Regression/**: Documenting the fundamentals of predictive modeling.
 * **📂 Logistic-Regression/**: Exploring classification logic and mechanics.
-* **📂 Gradient-Descent/**: My implementation and understanding of optimization.
 * **📂 Feature-Engineering/**: Personal notes and techniques for data transformation.
-* **📂 Renewable-Energy-Capstone/**: The final integration for my graduation project.
+* **📂 Renewable-Energy-Capstone/**: The first integration for my graduation project.
 
 *(Note: Most files here are `.ipynb` notebooks, where I capture my experiments, code, and thoughts.)*
 
----
+### 🔗 Project Structure 
+.  
+├── linearRegression/  
+│   ├── simpleLinearRegression.ipynb   # From-scratch implementation of SLR  
+│   └── MultipleLinearRegression.ipynb # From-scratch implementation of MLR   
+├── utils.py                           # Shared helper functions (e.g. Plotting)  
+├── README.md                          # Project documentation and roadmap  
+└── .gitignore                         # To keep the repo clean
 
 ### 🛠️ Tech Stack
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
