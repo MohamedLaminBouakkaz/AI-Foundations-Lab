@@ -5,6 +5,9 @@ MSE = lambda y, y_pred: np.mean((y - y_pred) ** 2)
 MAE = lambda y, y_pred: np.mean(np.abs(y - y_pred))
 RMSE = lambda y, y_pred: np.sqrt(MSE(y, y_pred))
 RMSLE = lambda y, y_pred: np.sqrt(np.mean((np.log1p(y) - np.log1p(y_pred)) ** 2))
+R2_score = lambda y, y_pred: 1 - np.sum((y - y_pred) ** 2) / np.sum(
+    (y - np.mean(y)) ** 2
+)
 
 
 def plot_learning_curve(cost, label):
