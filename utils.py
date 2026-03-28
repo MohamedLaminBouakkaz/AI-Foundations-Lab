@@ -13,14 +13,15 @@ R2_score = lambda y, y_pred: 1 - np.sum((y - y_pred) ** 2) / np.sum(
 def normalization(X):
     """
     paramter :
-    X (numpy.ndarray): The input features.
+    X (numpy.ndarray): The input features to be normalized.
     returns :
-    X_norm (numpy.ndarray): The features after normalization.
+    X_norm (numpy.ndarray): The normalized input features.
+
     """
     x_min = np.min(X, axis=0)
     x_max = np.max(X, axis=0)
     X_range = x_max - x_min
-    x_norm = (X - x_min) / (X_range + 10e-8)
+    x_norm = (X - x_min) / (X_range + 10e-8)  # to avoid division by zero
     return x_norm
 
 
@@ -38,6 +39,28 @@ def gd_compute_cost(y_true, y_pred):
     return (1 / (2 * m)) * np.dot(error.T, error)
 
 
+def split_data(X, y, test_size=0.2):
+    """
+    Splits the dataset into training and testing sets.
+    Parameters:
+    X (numpy.ndarray): The input features.
+    y (numpy.ndarray): The target values.
+    test_size (float): The proportion of the dataset to include in the test split.
+    Returns:
+    numpy.ndarray: The training input features.
+    numpy.ndarray: The training target values.
+    numpy.ndarray: The testing input features.
+    numpy.ndarray: The testing target values.
+    """
+    m = len(y)
+    indices = np.arange(m)
+    np.random.shuffle(indices)
+    test_size = int(m * test_size)
+    train_indices = indices[:-test_size]
+    test_indices = indices[-test_size:]
+    return X[train_indices], y[train_indices], X[test_indices], y[test_indices]
+
+
 def gradientDescent(X, y, learning_rate, epochs):
     """
     Performs gradient descent to optimize the weights of a linear regression model.
@@ -47,7 +70,9 @@ def gradientDescent(X, y, learning_rate, epochs):
     learning_rate (float): The learning rate for gradient descent.
     epochs (int): The number of iterations for gradient descent.
     Returns:
-    numpy.ndarray: The optimized weights."""
+    numpy.ndarray: The optimized weights.
+    numpy.ndarray: The history of cost values during training.
+    """
     m = len(y)
     w_num = X.shape[1]
     W = np.zeros(w_num)
