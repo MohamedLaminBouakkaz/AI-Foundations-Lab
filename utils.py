@@ -10,12 +10,32 @@ R2_score = lambda y, y_pred: 1 - np.sum((y - y_pred) ** 2) / np.sum(
 )
 
 
+def normalization(X):
+    """
+    paramter :
+    X (numpy.ndarray): The input features.
+    returns :
+    X_norm (numpy.ndarray): The features after normalization.
+    """
+    x_min = np.min(X, axis=0)
+    x_max = np.max(X, axis=0)
+    X_range = x_max - x_min
+    x_norm = (X - x_min) / (X_range + 10e-8)
+    return x_norm
+
+
 def plot_learning_curve(cost, label):
     plt.plot(cost, label=label)
     plt.xlabel("epochs")
     plt.ylabel("cost")
     plt.legend()
     plt.show()
+
+
+def gd_compute_cost(y_true, y_pred):
+    m = len(y_true)
+    error = y_pred - y_true
+    return (1 / (2 * m)) * np.dot(error.T, error)
 
 
 def gradientDescent(X, y, learning_rate, epochs):
@@ -27,15 +47,15 @@ def gradientDescent(X, y, learning_rate, epochs):
     learning_rate (float): The learning rate for gradient descent.
     epochs (int): The number of iterations for gradient descent.
     Returns:
-    numpy.ndarray: The optimized weights.
-    numpy.ndarray: The cost values for each epoch."""
+    numpy.ndarray: The optimized weights."""
     m = len(y)
-    X = np.c_[X, np.ones(m)]
     w_num = X.shape[1]
     W = np.zeros(w_num)
+    cost_hestory = []
     for i in range(epochs):
         pred = np.dot(X, W)
         error = pred - y
         gradient = (1 / m) * np.dot(X.T, error)
         W = W - learning_rate * gradient
-    return W
+        cost_hestory.append(gd_compute_cost(y, pred))
+    return W, np.array(cost_hestory)
