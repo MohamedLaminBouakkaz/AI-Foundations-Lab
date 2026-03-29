@@ -25,6 +25,20 @@ def normalization(X):
     return x_norm
 
 
+def standardization(X):
+    """
+    parameter :
+    X (numpy.ndarray): The input features to be standardized.
+    returns :
+    X_std (numpy.ndarray): The standardized input features.
+
+    """
+    mu = np.mean(X, axis=0)
+    sigma = np.std(X, axis=0)
+    x_standardized = (X - mu) / (sigma + 10e-8)  # to avoid division by zero
+    return x_standardized
+
+
 def plot_learning_curve(cost, label):
     plt.plot(cost, label=label)
     plt.xlabel("epochs")
