@@ -1,3 +1,10 @@
+"""
+This file contains a set of functions that have been rewritten here for use in files outside of those explained in it
+(they were explained in the ipynb files and cannot be called).
+Note that there are some helper functions here that are unrelated to formulas,
+such as the plot function and data splitting.
+"""
+
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -61,10 +68,10 @@ def split_data(X, y, test_size=0.2):
     y (numpy.ndarray): The target values.
     test_size (float): The proportion of the dataset to include in the test split.
     Returns:
-    numpy.ndarray: The training input features.
-    numpy.ndarray: The training target values.
-    numpy.ndarray: The testing input features.
-    numpy.ndarray: The testing target values.
+    X_train (numpy.ndarray): The training input features.
+    y_train (numpy.ndarray): The training target values.
+    X_test (numpy.ndarray): The testing input features.
+    y_test (numpy.ndarray): The testing target values.
     """
     m = len(y)
     indices = np.arange(m)
@@ -87,9 +94,8 @@ def gradientDescent(X, y, learning_rate, epochs):
     numpy.ndarray: The optimized weights.
     numpy.ndarray: The history of cost values during training.
     """
-    m = len(y)
-    w_num = X.shape[1]
-    W = np.zeros(w_num)
+    m, n = X.shape
+    W = np.zeros(n)
     cost_hestory = []
     for i in range(epochs):
         pred = np.dot(X, W)
